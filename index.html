@@ -184,6 +184,24 @@ main{padding-top:68px}
   background:linear-gradient(0deg, rgba(3,8,20,.78), transparent);
 }
 
+
+/* ---------- Explore menu (centered, serial animation) ---------- */
+.explore-menu{position:fixed; inset:0; z-index:300; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(4,10,24,.74); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); opacity:0; pointer-events:none; transition:opacity .35s ease}
+.explore-menu.open{opacity:1; pointer-events:auto}
+.em-title{color:#cfe2ff; font-size:.95rem; font-weight:700; letter-spacing:.28em; text-transform:uppercase; margin-bottom:22px}
+.em-list{display:flex; flex-direction:column; gap:14px; width:min(420px,84vw)}
+.em-item{padding:16px 22px; border-radius:999px; border:1px solid rgba(160,195,255,.45); background:linear-gradient(135deg, rgba(46,124,246,.30), rgba(46,124,246,.08)); color:#fff; font-family:inherit; font-size:1.15rem; font-weight:700; cursor:pointer; transition:background .25s, transform .25s, border-color .25s, box-shadow .25s}
+.em-item:hover, .em-item:active, .em-item:focus-visible{background:linear-gradient(135deg, rgba(46,124,246,.55), rgba(46,124,246,.2)); border-color:#fff; transform:translateY(-6px) scale(1.03); box-shadow:0 18px 34px rgba(0,0,0,.38)}
+.explore-menu.open .em-item{animation:emIn .5s cubic-bezier(.2,.85,.3,1.15) backwards}
+.explore-menu.open .em-item:nth-child(1){animation-delay:.05s}
+.explore-menu.open .em-item:nth-child(2){animation-delay:.16s}
+.explore-menu.open .em-item:nth-child(3){animation-delay:.27s}
+.explore-menu.open .em-item:nth-child(4){animation-delay:.38s}
+.explore-menu.open .em-item:nth-child(5){animation-delay:.49s}
+@keyframes emIn{from{opacity:0; transform:translateY(28px) scale(.95)} to{opacity:1; transform:translateY(0) scale(1)}}
+.em-close{position:absolute; top:20px; right:24px; width:46px; height:46px; border-radius:50%; border:1px solid rgba(160,195,255,.5); background:rgba(10,20,45,.4); color:#fff; font-size:1.15rem; cursor:pointer}
+.em-close:hover{background:rgba(46,124,246,.5)}
+
 /* ---------- Contact ---------- */
 .contact-grid{display:grid; grid-template-columns:1fr 1.15fr; gap:48px; margin-top:40px; align-items:start}
 .contact-info h2{font-size:2rem; font-weight:800}
@@ -332,7 +350,7 @@ footer b{color:var(--muted)}
         <div class="hero-roles">Traveler <span>•</span> Developer <span>•</span> Dreamer</div>
         <p class="hero-desc">I explore new places, build cool things, and love to learn. Welcome to my personal space!</p>
         <div class="hero-btns">
-          <a class="btn btn-primary" href="#projects" data-nav="projects">Explore More <span aria-hidden="true">→</span></a>
+          <button type="button" class="btn btn-primary" id="exploreBtn">Explore More <span aria-hidden="true">→</span></button>
           <a class="btn btn-ghost" href="#contact" data-nav="contact">Contact Me</a>
         </div>
       </div>
@@ -656,6 +674,19 @@ footer b{color:var(--muted)}
   © 2026 <b>Ubaidur Rahman Tanjid</b> • Traveler • Developer • Dreamer • Made with 💙 in Bangladesh
 </footer>
 
+<!-- ============ EXPLORE MENU ============ -->
+<div class="explore-menu" id="exploreMenu" aria-hidden="true" role="dialog" aria-label="Explore menu">
+  <button class="em-close" id="exploreClose" aria-label="Close menu">✕</button>
+  <p class="em-title">Where to?</p>
+  <div class="em-list">
+    <button class="em-item" data-go="about">About</button>
+    <button class="em-item" data-go="projects">Projects</button>
+    <button class="em-item" data-go="blog">Blog</button>
+    <button class="em-item" data-go="gallery">Gallery</button>
+    <button class="em-item" data-go="contact">Contact</button>
+  </div>
+</div>
+
 <script>
 (function(){
   var pages = ["home","about","projects","blog","gallery","contact"];
@@ -702,6 +733,22 @@ footer b{color:var(--muted)}
 
   document.querySelectorAll("[data-back]").forEach(function(b){
     b.addEventListener("click", function(){ location.hash = "#blog"; showPage("blog", null); });
+  });
+
+  var exploreMenu = document.getElementById("exploreMenu");
+  function openExplore(){ exploreMenu.classList.add("open"); exploreMenu.setAttribute("aria-hidden", "false"); }
+  function closeExplore(){ exploreMenu.classList.remove("open"); exploreMenu.setAttribute("aria-hidden", "true"); }
+  document.getElementById("exploreBtn").addEventListener("click", openExplore);
+  document.getElementById("exploreClose").addEventListener("click", closeExplore);
+  exploreMenu.addEventListener("click", function(e){ if(e.target === exploreMenu) closeExplore(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeExplore(); });
+  exploreMenu.querySelectorAll("[data-go]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var go = b.getAttribute("data-go");
+      closeExplore();
+      location.hash = "#" + go;
+      showPage(go, null);
+    });
   });
 
   document.getElementById("burgerBtn").addEventListener("click", function(){
