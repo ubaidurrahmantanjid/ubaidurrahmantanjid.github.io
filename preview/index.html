@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ubaidur Rahman Tanjid — Traveler • Developer • Dreamer</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a1128'/%3E%3Cpath d='M9 13h21v7h-7v31h-7V20H9z' fill='%234db2ff'/%3E%3Cpath d='M23 51 37 23l13 28z' fill='%232e7cf6'/%3E%3Cpath d='M38 51 48 31l9 20z' fill='%2356a8ff'/%3E%3C/svg%3E">
+<meta name="description" content="Personal website of Ubaidur Rahman Tanjid — science student from Mymensingh, Bangladesh. Traveler, developer, dreamer.">
+<style>
+:root{
+  --bg:#0a1122; --bg2:#0d1526; --panel:#111c33; --panel2:#0f1930;
+  --line:rgba(120,160,255,.14);
+  --text:#eef3ff; --muted:#a9b7d4; --muted2:#8494b5;
+  --accent:#2e7cf6; --accent2:#56a8ff; --accent-soft:rgba(46,124,246,.15);
+  --shadow:0 18px 50px rgba(0,0,0,.45);
+  --radius:18px;
+}
+body.light{
+  --bg:#eef2fb; --bg2:#e6ecf9; --panel:#ffffff; --panel2:#f4f7ff;
+  --line:rgba(30,70,160,.14);
+  --text:#12203c; --muted:#43557a; --muted2:#5d7197;
+  --accent-soft:rgba(46,124,246,.12);
+  --shadow:0 18px 40px rgba(30,60,130,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg); color:var(--text); min-height:100vh;
+  transition:background .35s ease,color .35s ease;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ---------- Header / Nav ---------- */
+header{
+  position:fixed; inset:0 0 auto 0; z-index:100; height:68px;
+  display:flex; align-items:center;
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-wrap{width:min(1200px,92%); margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:16px}
+.logo{display:flex; align-items:center; gap:10px; font-size:1.3rem; font-weight:800; letter-spacing:.3px}
+.logo svg{height:30px;width:auto;flex:none}
+nav.main{display:flex; gap:6px; align-items:center}
+nav.main a{
+  padding:9px 15px; border-radius:10px; font-size:.98rem; font-weight:600; color:var(--muted);
+  transition:color .2s, background .2s; position:relative;
+}
+nav.main a:hover{color:var(--text)}
+nav.main a.active{color:var(--accent2)}
+nav.main a.active::after{
+  content:""; position:absolute; left:15px; right:15px; bottom:3px; height:2.5px;
+  border-radius:2px; background:var(--accent);
+}
+.nav-actions{display:flex; align-items:center; gap:10px}
+.theme-btn{
+  width:40px;height:40px;border-radius:50%; border:1px solid var(--line); cursor:pointer;
+  background:var(--panel); color:var(--text); font-size:1.05rem; display:grid; place-items:center;
+  transition:transform .2s, background .2s;
+}
+.theme-btn:hover{transform:scale(1.08)}
+.burger{
+  display:none; width:42px;height:42px;border-radius:10px;border:1px solid var(--line);
+  background:var(--panel); color:var(--text); font-size:1.25rem; cursor:pointer;
+}
+
+/* ---------- Pages ---------- */
+main{padding-top:68px}
+.page{display:none}
+.page.active{display:block; animation:pageIn .45s ease both}
+@keyframes pageIn{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+.section{width:min(1200px,92%); margin:0 auto; padding:64px 0 80px}
+.page-title{font-size:2.2rem; font-weight:800; text-align:center}
+.page-title .grad{background:linear-gradient(90deg,var(--accent2),#7cc0ff); -webkit-background-clip:text; background-clip:text; color:transparent}
+.page-sub{text-align:center; color:var(--muted); margin-top:10px; font-size:1.02rem}
+
+/* ---------- Hero (Home) ---------- */
+.hero{
+  position:relative; min-height:calc(100vh - 68px); display:flex; align-items:center;
+  overflow:hidden; isolation:isolate;
+}
+.hero-bg{position:absolute; inset:0; z-index:-2}
+.hero-bg svg{width:100%; height:100%; display:block}
+.hero-shade{
+  position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(90deg, rgba(5,10,24,.72) 0%, rgba(5,10,24,.45) 42%, rgba(5,10,24,.05) 75%),
+             linear-gradient(0deg, var(--bg) 0%, transparent 26%);
+}
+.hero-inner{width:min(1200px,92%); margin:0 auto; padding:56px 0 90px}
+.hero-text{max-width:640px; color:#f2f6ff}
+.hero-text .hi{font-size:clamp(2rem,5.2vw,3.4rem); font-weight:800; line-height:1.12; text-shadow:0 4px 30px rgba(0,0,0,.5)}
+.hero-text h1{font-size:clamp(2.1rem,5.6vw,3.7rem); font-weight:800; line-height:1.14; text-shadow:0 4px 30px rgba(0,0,0,.5)}
+.hero-text h1 .script{
+  font-family:"Segoe Script","Brush Script MT","Comic Sans MS",cursive;
+  font-weight:600; color:#3f9dff; font-size:1.12em; margin-left:.12em;
+  text-shadow:0 4px 24px rgba(0,60,160,.55);
+}
+.hero-roles{margin-top:18px; font-size:clamp(1.02rem,2.4vw,1.3rem); font-weight:600; letter-spacing:.4px; color:#dbe7ff}
+.hero-roles span{margin:0 .35em; color:#7db4ff}
+.hero-desc{margin-top:16px; font-size:clamp(.98rem,2vw,1.1rem); line-height:1.65; color:#c3d2ee; max-width:520px}
+.hero-btns{margin-top:32px; display:flex; gap:16px; flex-wrap:wrap}
+.btn{
+  display:inline-flex; align-items:center; gap:9px; padding:14px 28px; border-radius:999px;
+  font-size:1rem; font-weight:700; cursor:pointer; border:1.5px solid transparent;
+  transition:transform .2s, box-shadow .2s, background .2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:linear-gradient(135deg,#2e7cf6,#1f66dd); color:#fff; box-shadow:0 12px 30px rgba(46,124,246,.4)}
+.btn-ghost{background:rgba(10,20,45,.35); color:#eaf2ff; border-color:rgba(190,215,255,.55); backdrop-filter:blur(4px)}
+.btn-ghost:hover{border-color:#fff}
+.scroll-hint{
+  position:absolute; left:50%; bottom:22px; transform:translateX(-50%);
+  width:26px; height:44px; border:2px solid rgba(200,220,255,.65); border-radius:14px; z-index:2;
+}
+.scroll-hint::after{
+  content:""; position:absolute; left:50%; top:8px; width:5px; height:9px; margin-left:-2.5px;
+  border-radius:3px; background:rgba(220,235,255,.9); animation:wheel 1.8s ease infinite;
+}
+@keyframes wheel{0%{transform:translateY(0);opacity:1} 60%{transform:translateY(12px);opacity:0} 100%{opacity:0}}
+
+/* ---------- Cards / grids ---------- */
+.grid{display:grid; gap:24px; margin-top:44px}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.card{
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+  overflow:hidden; box-shadow:var(--shadow); transition:transform .25s, border-color .25s;
+}
+.card:hover{transform:translateY(-6px); border-color:rgba(90,150,255,.45)}
+.card .thumb{height:180px; position:relative; overflow:hidden}
+.card .thumb svg{width:100%;height:100%;display:block}
+.card .body{padding:22px 22px 24px}
+.card h3{font-size:1.18rem; font-weight:750}
+.card p{margin-top:9px; color:var(--muted); line-height:1.6; font-size:.97rem}
+.card .meta{margin-top:12px; color:var(--muted2); font-size:.88rem; display:flex; align-items:center; gap:7px}
+.card .link{margin-top:16px; display:inline-flex; gap:8px; align-items:center; color:var(--accent2); font-weight:700; font-size:.95rem}
+.card .link:hover{gap:12px}
+.card .link{transition:gap .2s}
+
+/* ---------- About ---------- */
+.about-grid{display:grid; grid-template-columns:400px 1fr; gap:56px; align-items:center; margin-top:14px}
+.portrait-wrap{position:relative; max-width:400px}
+.portrait-wrap::before{
+  content:""; position:absolute; inset:14px -14px -14px 14px; border:2.5px solid var(--accent);
+  border-radius:26px; z-index:0;
+}
+.portrait-wrap img{
+  position:relative; z-index:1; width:100%; border-radius:26px; box-shadow:var(--shadow);
+  aspect-ratio:4/5; object-fit:cover;
+}
+.about-text h2{font-size:2.15rem; font-weight:800}
+.about-text h2 .grad{background:linear-gradient(90deg,var(--accent2),#7cc0ff); -webkit-background-clip:text; background-clip:text; color:transparent}
+.about-text p{margin-top:18px; color:var(--muted); line-height:1.75; font-size:1.03rem}
+.badges{display:flex; gap:12px; flex-wrap:wrap; margin-top:26px}
+.badge{
+  display:inline-flex; align-items:center; gap:9px; padding:10px 18px; border-radius:999px;
+  background:var(--accent-soft); border:1px solid var(--line); font-weight:650; font-size:.95rem;
+}
+.badge svg{width:18px;height:18px}
+.quote{
+  margin-top:28px; font-family:"Segoe Script","Brush Script MT",cursive; font-size:1.45rem; color:var(--accent2);
+}
+.skills{margin-top:40px}
+.skills h3, .stats-h{font-size:1.25rem; font-weight:750; margin-bottom:18px}
+.skill{margin-bottom:16px}
+.skill .row{display:flex; justify-content:space-between; font-size:.95rem; margin-bottom:7px}
+.skill .row b{font-weight:700}
+.bar{height:9px; border-radius:6px; background:var(--accent-soft); overflow:hidden}
+.bar i{display:block; height:100%; width:0; border-radius:6px; background:linear-gradient(90deg,var(--accent),var(--accent2)); transition:width 1.1s ease}
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:44px}
+.stat{
+  background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:22px 12px; text-align:center;
+}
+.stat b{display:block; font-size:1.7rem; color:var(--accent2)}
+.stat span{color:var(--muted); font-size:.9rem}
+
+/* ---------- Gallery ---------- */
+.g-grid{columns:3; column-gap:22px; margin-top:44px}
+.g-item{border-radius:var(--radius); overflow:hidden; position:relative; border:1px solid var(--line); box-shadow:var(--shadow); margin:0 0 22px; break-inside:avoid}
+.g-item img{width:100%; height:auto; display:block}
+.g-item figcaption{
+  position:absolute; inset:auto 0 0 0; padding:30px 16px 13px; color:#fff; font-weight:700; font-size:.98rem;
+  background:linear-gradient(0deg, rgba(3,8,20,.78), transparent);
+}
+
+
+/* ---------- Explore menu (centered, serial animation) ---------- */
+.explore-menu{position:fixed; inset:0; z-index:300; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(4,10,24,.74); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); opacity:0; pointer-events:none; transition:opacity .35s ease}
+.explore-menu.open{opacity:1; pointer-events:auto}
+.em-title{color:#cfe2ff; font-size:.95rem; font-weight:700; letter-spacing:.28em; text-transform:uppercase; margin-bottom:22px}
+.em-list{display:flex; flex-direction:column; gap:14px; width:min(420px,84vw)}
+.em-item{padding:16px 22px; border-radius:999px; border:1px solid rgba(160,195,255,.45); background:linear-gradient(135deg, rgba(46,124,246,.30), rgba(46,124,246,.08)); color:#fff; font-family:inherit; font-size:1.15rem; font-weight:700; cursor:pointer; transition:background .25s, transform .25s, border-color .25s, box-shadow .25s}
+.em-item:hover, .em-item:active, .em-item:focus-visible{background:linear-gradient(135deg, rgba(46,124,246,.55), rgba(46,124,246,.2)); border-color:#fff; transform:translateY(-6px) scale(1.03); box-shadow:0 18px 34px rgba(0,0,0,.38)}
+.explore-menu.open .em-item{animation:emIn .5s cubic-bezier(.2,.85,.3,1.15) backwards}
+.explore-menu.open .em-item:nth-child(1){animation-delay:.05s}
+.explore-menu.open .em-item:nth-child(2){animation-delay:.16s}
+.explore-menu.open .em-item:nth-child(3){animation-delay:.27s}
+.explore-menu.open .em-item:nth-child(4){animation-delay:.38s}
+.explore-menu.open .em-item:nth-child(5){animation-delay:.49s}
+@keyframes emIn{from{opacity:0; transform:translateY(28px) scale(.95)} to{opacity:1; transform:translateY(0) scale(1)}}
+.em-close{position:absolute; top:20px; right:24px; width:46px; height:46px; border-radius:50%; border:1px solid rgba(160,195,255,.5); background:rgba(10,20,45,.4); color:#fff; font-size:1.15rem; cursor:pointer}
+.em-close:hover{background:rgba(46,124,246,.5)}
+
+/* ---------- Contact ---------- */
+.contact-grid{display:grid; grid-template-columns:1fr 1.15fr; gap:48px; margin-top:40px; align-items:start}
+.contact-info h2{font-size:2rem; font-weight:800}
+.contact-info h2 .grad{background:linear-gradient(90deg,var(--accent2),#7cc0ff); -webkit-background-clip:text; background-clip:text; color:transparent}
+.contact-info>p{margin-top:14px; color:var(--muted); line-height:1.7}
+.c-line{display:flex; align-items:center; gap:13px; margin-top:20px; font-size:1rem}
+.c-line .ic{
+  width:42px;height:42px;flex:none; border-radius:12px; display:grid; place-items:center;
+  background:var(--accent-soft); color:var(--accent2);
+}
+.c-line .ic svg{width:20px;height:20px}
+.socials{display:flex; gap:12px; margin-top:28px}
+.socials a{
+  width:44px;height:44px; border-radius:50%; display:grid; place-items:center;
+  background:var(--panel); border:1px solid var(--line); transition:transform .2s, background .2s;
+}
+.socials a:hover{transform:translateY(-3px); background:var(--accent-soft)}
+.socials svg{width:20px;height:20px; fill:var(--text)}
+form.cform{
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+  padding:28px; box-shadow:var(--shadow); display:grid; gap:16px;
+}
+.cform input, .cform textarea{
+  width:100%; padding:14px 16px; border-radius:12px; border:1px solid var(--line);
+  background:var(--panel2); color:var(--text); font:inherit; font-size:.98rem; resize:vertical;
+}
+.cform input:focus, .cform textarea:focus{outline:2px solid var(--accent); border-color:transparent}
+.cform button{justify-content:center}
+
+/* ---------- Blog reader ---------- */
+.reader{max-width:760px; margin:0 auto}
+.reader .back{color:var(--accent2); font-weight:700; display:inline-flex; gap:8px; margin-bottom:22px; cursor:pointer}
+.reader h2{font-size:1.9rem; line-height:1.3}
+.reader .meta{color:var(--muted2); margin:12px 0 22px}
+.reader p{color:var(--muted); line-height:1.85; margin-bottom:16px; font-size:1.03rem}
+
+footer{
+  border-top:1px solid var(--line); padding:26px 0; text-align:center; color:var(--muted2); font-size:.92rem;
+}
+footer b{color:var(--muted)}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 980px){
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+  .g-grid{columns:2}
+  .about-grid{grid-template-columns:1fr; gap:40px}
+  .portrait-wrap{margin:0 auto}
+  .contact-grid{grid-template-columns:1fr; gap:36px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width: 720px){
+  nav.main{
+    position:fixed; top:68px; left:0; right:0; flex-direction:column; align-items:stretch;
+    background:var(--bg2); border-bottom:1px solid var(--line); padding:12px 5%;
+    display:none; gap:2px;
+  }
+  nav.main.open{display:flex}
+  nav.main a{padding:13px 14px}
+  nav.main a.active::after{display:none}
+  nav.main a.active{background:var(--accent-soft)}
+  .burger{display:grid; place-items:center}
+  .grid-3{grid-template-columns:1fr}
+  .g-grid{columns:1}
+  .hero-inner{padding:44px 0 84px}
+  .section{padding:48px 0 64px}
+}
+</style>
+
+<style id="fx-preview">
+/* ===== PREVIEW: polished home animations ===== */
+.page-home .hero-text>*{opacity:0; animation:fxUp 1s cubic-bezier(.16,.84,.3,1) forwards}
+.page-home .hero-text>*:nth-child(1){animation-delay:.15s}
+.page-home .hero-text>*:nth-child(2){animation-delay:.4s}
+.page-home .hero-text>*:nth-child(3){animation-delay:.65s}
+.page-home .hero-text>*:nth-child(4){animation-delay:.9s}
+.page-home .hero-text>*:nth-child(5){animation-delay:1.15s}
+@keyframes fxUp{from{opacity:0; transform:translateY(36px) scale(.985)} to{opacity:1; transform:translateY(0) scale(1)}}
+.page-home h1 .script{background:linear-gradient(110deg,#7cc0ff 15%,#ffffff 38%,#9fd0ff 52%,#2e7cf6 72%,#7cc0ff 90%); background-size:220% auto; -webkit-background-clip:text; background-clip:text; color:transparent; animation:fxShine 5s linear infinite}
+@keyframes fxShine{to{background-position:220% center}}
+.hero-bg svg>g circle{animation:fxTw 2.6s ease-in-out infinite alternate}
+.hero-bg svg>g circle:nth-child(2n){animation-delay:.7s; animation-duration:3.4s}
+.hero-bg svg>g circle:nth-child(3n){animation-delay:1.3s; animation-duration:2.1s}
+@keyframes fxTw{from{opacity:.15} to{opacity:1}}
+.fx-layer{position:absolute; inset:0; overflow:hidden; pointer-events:none}
+.fx-star{position:absolute; border-radius:50%; background:#eaf2ff; box-shadow:0 0 6px 1px rgba(190,220,255,.8); animation:fxTw 2.4s ease-in-out infinite alternate}
+.fx-cloud{position:absolute; height:40px; border-radius:50px; background:radial-gradient(ellipse at center, rgba(255,216,175,.42), rgba(255,216,175,0) 70%); filter:blur(7px); animation:fxDrift linear infinite}
+@keyframes fxDrift{from{transform:translateX(-35vw)} to{transform:translateX(118vw)}}
+.fx-sun{position:absolute; width:340px; height:340px; border-radius:50%; background:radial-gradient(circle, rgba(255,190,110,.5) 0%, rgba(255,160,80,.18) 45%, rgba(255,160,80,0) 70%); animation:fxPulse 5.5s ease-in-out infinite}
+@keyframes fxPulse{0%,100%{transform:scale(1); opacity:.75} 50%{transform:scale(1.13); opacity:1}}
+.fx-shoot{position:absolute; width:140px; height:2px; border-radius:2px; background:linear-gradient(90deg,#fff,rgba(255,255,255,0)); transform:rotate(-24deg); opacity:0; animation:fxShoot 9s ease-in infinite}
+@keyframes fxShoot{0%,70%{opacity:0; transform:translate(0,0) rotate(-24deg)} 74%{opacity:1} 86%,100%{opacity:0; transform:translate(-48vw,27vh) rotate(-24deg)}}
+.page-home .hero-btns .btn{position:relative; overflow:hidden}
+.page-home .hero-btns .btn::after{content:""; position:absolute; top:0; left:-80%; width:50%; height:100%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent); transform:skewX(-20deg); animation:fxBtn 3.6s ease-in-out infinite}
+@keyframes fxBtn{0%,55%{left:-80%} 85%,100%{left:130%}}
+.fx-chip{position:fixed; left:14px; bottom:14px; z-index:999; background:rgba(6,14,30,.88); color:#cfe2ff; border:1px solid rgba(140,180,255,.45); padding:8px 14px; border-radius:999px; font-size:.82rem}
+@media (prefers-reduced-motion: reduce){.page-home .hero-text>*{animation:none; opacity:1} .fx-layer{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a class="logo" href="#home" data-nav="home" aria-label="Tanjid — Home">
+      <svg viewBox="0 0 76 44" fill="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="logoGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#4db2ff"/><stop offset="1" stop-color="#1f66dd"/>
+          </linearGradient>
+        </defs>
+        <path d="M44 40 L56 20 L70 40 Z" fill="#56a8ff" opacity=".85"/>
+        <path d="M20 40 L38 8 L58 40 Z" fill="url(#logoGrad)"/>
+        <path d="M2 4 H32 V12 H21 V40 H13 V12 H2 Z" fill="url(#logoGrad)"/>
+      </svg>
+      Tanjid
+    </a>
+    <nav class="main" id="mainNav">
+      <a href="#home" data-nav="home" class="active">Home</a>
+      <a href="#about" data-nav="about">About</a>
+      <a href="#projects" data-nav="projects">Projects</a>
+      <a href="#blog" data-nav="blog">Blog</a>
+      <a href="#gallery" data-nav="gallery">Gallery</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" title="Dark / Light mode" aria-label="Toggle dark or light mode">🌙</button>
+      <button class="burger" id="burgerBtn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ================= HOME ================= -->
+<section class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <svg viewBox="0 0 1440 810" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0a1230"/>
+            <stop offset=".42" stop-color="#274069"/>
+            <stop offset=".68" stop-color="#7a5a78"/>
+            <stop offset=".85" stop-color="#c97a3d"/>
+            <stop offset="1" stop-color="#e89a4e"/>
+          </linearGradient>
+          <radialGradient id="sunglow" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#ffd9a0" stop-opacity=".95"/>
+            <stop offset=".35" stop-color="#ffb35c" stop-opacity=".55"/>
+            <stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="fadeBottom" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0a1122" stop-opacity="0"/>
+            <stop offset="1" stop-color="#0a1122" stop-opacity=".55"/>
+          </linearGradient>
+        </defs>
+        <rect width="1440" height="810" fill="url(#sky)"/>
+        <g fill="#dfe9ff">
+          <circle cx="120" cy="90" r="1.6"/><circle cx="300" cy="150" r="1.2"/><circle cx="520" cy="70" r="1.5"/>
+          <circle cx="760" cy="120" r="1.1"/><circle cx="980" cy="60" r="1.6"/><circle cx="1240" cy="110" r="1.2"/>
+          <circle cx="1380" cy="180" r="1.4"/><circle cx="640" cy="180" r="1"/><circle cx="180" cy="230" r="1"/>
+          <circle cx="1080" cy="200" r="1"/><circle cx="430" cy="120" r="1"/>
+        </g>
+        <circle cx="1135" cy="470" r="230" fill="url(#sunglow)"/>
+        <circle cx="1135" cy="470" r="52" fill="#ffcf8f"/>
+        <path d="M0 470 L180 380 L330 440 L520 350 L700 430 L880 370 L1060 445 L1230 385 L1440 450 L1440 810 L0 810 Z" fill="#2c3d63" opacity=".75"/>
+        <path d="M0 545 L220 455 L420 520 L640 440 L860 515 L1080 460 L1260 520 L1440 470 L1440 810 L0 810 Z" fill="#1d2c4e" opacity=".9"/>
+        <path d="M0 640 L260 545 L520 615 L800 540 L1080 610 L1280 560 L1440 605 L1440 810 L0 810 Z" fill="#121f3c"/>
+        <path d="M760 810 L900 668 L1090 640 L1265 668 L1440 720 L1440 810 Z" fill="#0a1428"/>
+        <g fill="#060d1d">
+          <circle cx="1052" cy="612" r="11"/>
+          <path d="M1050 622 q-4 22 6 34 l16 20 q3 4 8 2 q5 -2 2 -7 l-12 -18 q-4 -6 -2 -12 l14 2 q10 1 12 10 l3 14 q1 6 7 5 q6 -1 4 -8 l-4 -18 q-3 -14 -16 -17 l-20 -3 q-6 -9 -8 -14 q-1 -6 -10 -4 z"/>
+          <path d="M1032 640 q14 4 20 14 l-4 6 q-8 -8 -20 -11 z"/>
+        </g>
+        <rect width="1440" height="810" fill="url(#fadeBottom)"/>
+      </svg>
+    </div>
+    <div class="hero-shade"></div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hi">Hi, I'm</div>
+        <h1>Ubaidur Rahman <span class="script">Tanjid</span></h1>
+        <div class="hero-roles">Traveler <span>•</span> Developer <span>•</span> Dreamer</div>
+        <p class="hero-desc">I explore new places, build cool things, and love to learn. Welcome to my personal space!</p>
+        <div class="hero-btns">
+          <button type="button" class="btn btn-primary" id="exploreBtn">Explore More <span aria-hidden="true">→</span></button>
+          <a class="btn btn-ghost" href="#contact" data-nav="contact">Contact Me</a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="page" id="page-about">
+  <div class="section">
+    <div class="about-grid">
+      <div class="portrait-wrap">
+        <img src="/tanjidwebpic.jpg.jpg" alt="Ubaidur Rahman Tanjid">
+      </div>
+      <div class="about-text">
+        <h2>About <span class="grad">Me</span></h2>
+        <p>I'm Ubaidur Rahman Tanjid, a second-year science student at Mymensingh Advanced Residential Model College. I'm passionate about travel, technology, and gaming.</p>
+        <p>I love exploring new places, learning new skills, and turning ideas into reality.</p>
+        <div class="badges">
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4 L22 9 L12 14 L2 9 Z" fill="#56a8ff"/><path d="M6 11.5 V16 c0 1.5 2.7 3 6 3 s6 -1.5 6 -3 V11.5 L12 14.5 Z" fill="#2e7cf6"/></svg> Student</span>
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21 s-7 -5.3 -7 -11 a7 7 0 1 1 14 0 c0 5.7 -7 11 -7 11 Z" fill="#2e7cf6"/><circle cx="12" cy="10" r="2.8" fill="#eaf4ff"/></svg> Bangladesh</span>
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20.5 C7 16.5 3.5 13.3 3.5 9.6 A4.6 4.6 0 0 1 12 6.7 a4.6 4.6 0 0 1 8.5 2.9 c0 3.7 -3.5 6.9 -8.5 10.9 Z" fill="#2e7cf6"/></svg> Travel &amp; Tech</span>
+        </div>
+        <div class="quote">"Dream Big, Explore More..."</div>
+        <div class="skills">
+          <h3>My Skills</h3>
+          <div class="skill"><div class="row"><b>HTML &amp; CSS</b><span>20%</span></div><div class="bar"><i data-w="20"></i></div></div>
+          <div class="skill"><div class="row"><b>JavaScript</b><span>10%</span></div><div class="bar"><i data-w="10"></i></div></div>
+          <div class="skill"><div class="row"><b>AI Tools &amp; Creativity</b><span>85%</span></div><div class="bar"><i data-w="85"></i></div></div>
+          <div class="skill"><div class="row"><b>Travel Planning</b><span>90%</span></div><div class="bar"><i data-w="90"></i></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>10+</b><span>Trips Taken</span></div>
+      <div class="stat"><b>3+</b><span>Projects Built</span></div>
+      <div class="stat"><b>5+</b><span>Blog Stories</span></div>
+      <div class="stat"><b>∞</b><span>Dreams</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section class="page" id="page-projects">
+  <div class="section">
+    <h2 class="page-title">My <span class="grad">Projects</span></h2>
+    <p class="page-sub">Some of the things I've built and worked on.</p>
+    <div class="grid grid-3">
+      <article class="card">
+        <div class="thumb">
+          <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="pj1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b2ee5"/><stop offset="1" stop-color="#2e7cf6"/></linearGradient></defs>
+            <rect width="400" height="180" fill="url(#pj1)"/>
+            <g transform="rotate(-10 200 95)">
+              <rect x="172" y="28" width="56" height="112" rx="10" fill="#0d1526"/>
+              <rect x="178" y="40" width="44" height="76" rx="4" fill="#274b8f"/>
+              <circle cx="200" cy="128" r="4" fill="#56a8ff"/>
+              <circle cx="200" cy="76" r="15" fill="#ffcf5c"/>
+              <text x="200" y="82" font-size="15" font-weight="bold" fill="#7a4d00" text-anchor="middle">C</text>
+            </g>
+            <circle cx="90" cy="45" r="3" fill="#fff" opacity=".7"/><circle cx="320" cy="35" r="2.5" fill="#fff" opacity=".6"/>
+            <circle cx="300" cy="140" r="3.5" fill="#fff" opacity=".5"/><circle cx="70" cy="130" r="2.5" fill="#fff" opacity=".6"/>
+          </svg>
+        </div>
+        <div class="body">
+          <h3>Shopping App — Coinora</h3>
+          <p>A modern shopping app with a coin system. Buy coin packages, pay with coins at checkout, track orders, and manage everything from an admin panel.</p>
+          <a class="link" href="#contact" data-nav="contact">Ask About It <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb">
+          <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="pj2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd0ff"/><stop offset=".6" stop-color="#4d9be0"/><stop offset="1" stop-color="#1d5c46"/></linearGradient></defs>
+            <rect width="400" height="180" fill="url(#pj2)"/>
+            <circle cx="322" cy="38" r="17" fill="#ffdf94"/>
+            <path d="M0 130 L90 70 L150 105 L235 55 L310 105 L400 75 L400 180 L0 180 Z" fill="#14532d" opacity=".85"/>
+            <path d="M0 155 L120 105 L230 140 L400 110 L400 180 L0 180 Z" fill="#0b3520"/>
+            <path d="M235 55 L252 68 L218 68 Z" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="body">
+          <h3>Travel Blog</h3>
+          <p>A travel blog to share my adventures — trip stories, photos and guides from the hills, rivers and tea gardens of Bangladesh.</p>
+          <a class="link" href="#blog" data-nav="blog">Read Stories <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb">
+          <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="180" fill="#0d1526"/>
+            <rect x="55" y="30" width="290" height="120" rx="10" fill="#111c33" stroke="#2e7cf6" stroke-opacity=".4"/>
+            <circle cx="75" cy="46" r="5" fill="#ff5f57"/><circle cx="93" cy="46" r="5" fill="#febc2e"/><circle cx="111" cy="46" r="5" fill="#28c840"/>
+            <text x="75" y="82" font-family="monospace" font-size="13" fill="#7cc0ff">&lt;h1&gt;Hello, I'm Tanjid&lt;/h1&gt;</text>
+            <text x="75" y="106" font-family="monospace" font-size="13" fill="#9ece6a">const dream = "build &amp; explore";</text>
+            <text x="75" y="130" font-family="monospace" font-size="13" fill="#bb9af7">while (alive) &#123; learn(); &#125;</text>
+          </svg>
+        </div>
+        <div class="body">
+          <h3>Portfolio Website</h3>
+          <p>My personal website — the one you're looking at right now. Designed with a dark mountain theme, smooth pages and a fully responsive layout.</p>
+          <a class="link" href="#home" data-nav="home">Back to Home <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BLOG ================= -->
+<section class="page" id="page-blog">
+  <div class="section">
+    <h2 class="page-title">My <span class="grad">Blog</span></h2>
+    <p class="page-sub">Thoughts, guides and travel stories.</p>
+    <div class="grid grid-3" id="blogGrid">
+      <article class="card">
+        <div class="thumb">
+          <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="bl1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a8d8ff"/><stop offset="1" stop-color="#3a7ca5"/></linearGradient></defs>
+            <rect width="400" height="180" fill="url(#bl1)"/>
+            <path d="M0 120 L110 45 L180 95 L260 40 L340 100 L400 70 L400 180 L0 180 Z" fill="#274b73"/>
+            <path d="M260 40 L278 55 L242 55 Z" fill="#fff"/><path d="M110 45 L124 58 L96 58 Z" fill="#fff"/>
+            <path d="M0 150 L140 105 L280 140 L400 118 L400 180 L0 180 Z" fill="#16324f"/>
+          </svg>
+        </div>
+        <div class="body">
+          <h3>Top 5 Travel Destinations in Bangladesh</h3>
+          <p>From the sea of clouds at Sajek to the silent mangroves of the Sundarbans — five places every traveler in Bangladesh should see once.</p>
+          <div class="meta">📅 Nov 5, 2026</div>
+          <a class="link" href="#post-1" data-post="post-1">Read Post <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb">
+          <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="180" fill="#131b2e"/>
+            <rect x="105" y="42" width="190" height="105" rx="8" fill="#0a1122" stroke="#3a4a6b"/>
+            <rect x="118" y="55" width="164" height="66" fill="#0f1c38"/>
+            <text x="130" y="82" font-family="monospace" font-size="12.5" fill="#7cc0ff">if (curious) &#123;</text>
+            <text x="142" y="102" font-family="monospace" font-size="12.5" fill="#9ece6a">keepCoding();</text>
+            <text x="130" y="122" font-family="monospace" font-size="12.5" fill="#7cc0ff">&#125;</text>
+            <rect x="88" y="147" width="224" height="8" rx="4" fill="#3a4a6b"/>
+            <circle cx="330" cy="52" r="15" fill="#ffcf5c" opacity=".9"/>
+          </svg>
+        </div>
+        <div class="body">
+          <h3>Why I Love Coding</h3>
+          <p>Coding turns imagination into something real. A blank screen, a few lines of logic — and suddenly an idea starts working on its own.</p>
+          <div class="meta">📅 Oct 28, 2026</div>
+          <a class="link" href="#post-2" data-post="post-2">Read Post <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb">
+          <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="bl3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3c8"/><stop offset="1" stop-color="#2e7d52"/></linearGradient></defs>
+            <rect width="400" height="180" fill="url(#bl3)"/>
+            <path d="M0 95 Q100 60 200 90 T400 85 L400 180 L0 180 Z" fill="#1e5c3a"/>
+            <path d="M0 130 Q120 100 240 125 T400 120 L400 180 L0 180 Z" fill="#123f27"/>
+            <g stroke="#0d3520" stroke-width="5" fill="none"><path d="M60 180 V95"/><path d="M330 180 V105"/></g>
+            <g fill="#1a6b40"><circle cx="60" cy="88" r="22"/><circle cx="330" cy="98" r="26"/><circle cx="352" cy="112" r="18"/></g>
+          </svg>
+        </div>
+        <div class="body">
+          <h3>A Peaceful Trip to Sajek Valley</h3>
+          <p>Waking up above the clouds, quiet hills in every direction — Sajek is the closest thing to touching the sky without leaving the ground.</p>
+          <div class="meta">📅 Oct 20, 2026</div>
+          <a class="link" href="#post-3" data-post="post-3">Read Post <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+    </div>
+    <div style="text-align:center; margin-top:40px">
+      <a class="btn btn-ghost" href="#blog" data-nav="blog" style="color:var(--text); border-color:var(--line)">View All Posts →</a>
+    </div>
+
+    <div class="reader" id="post-1" hidden>
+      <a class="back" data-back>← Back to Blog</a>
+      <h2>Top 5 Travel Destinations in Bangladesh</h2>
+      <div class="meta">📅 Nov 5, 2026 • Travel Guide</div>
+      <p>Bangladesh is small on the map but huge in variety. If I had to pick only five places to show a first-time traveler, these would be my list — each one a completely different world.</p>
+      <p><b>1. Sajek Valley, Rangamati</b> — a sea of clouds below your feet at sunrise. <b>2. Cox's Bazar</b> — the longest sea beach in the world, best at golden hour. <b>3. Saint Martin's Island</b> — the country's only coral island, with water so clear you can count the stones.</p>
+      <p><b>4. Sylhet's tea gardens and Ratargul</b> — endless green rows and a swamp forest you explore by boat. <b>5. The Sundarbans</b> — the largest mangrove forest on Earth, silent rivers, and if you're lucky, a glimpse of the Royal Bengal Tiger.</p>
+      <p>My advice: don't rush. Pick one region per trip, stay at least two nights, and let the place slow you down. That's when Bangladesh really shows itself.</p>
+    </div>
+    <div class="reader" id="post-2" hidden>
+      <a class="back" data-back>← Back to Blog</a>
+      <h2>Why I Love Coding</h2>
+      <div class="meta">📅 Oct 28, 2026 • Thoughts</div>
+      <p>Most things in life need money, permission or luck to build. Coding needs only a laptop and an idea. That freedom is what pulled me in — and it's why I keep coming back.</p>
+      <p>There's a moment every coder knows: the code finally runs, the page loads, the button works. Something that existed only in your head is now real, and anyone in the world can use it. That feeling never gets old.</p>
+      <p>Coding also teaches patience like nothing else. A missing semicolon can stop everything — and hunting it down teaches you to think clearly, step by step. I believe that mindset helps far beyond the screen.</p>
+      <p>I'm still learning, and that's the best part. In this field, there's always a next level.</p>
+    </div>
+    <div class="reader" id="post-3" hidden>
+      <a class="back" data-back>← Back to Blog</a>
+      <h2>A Peaceful Trip to Sajek Valley</h2>
+      <div class="meta">📅 Oct 20, 2026 • Travel Story</div>
+      <p>The road to Sajek is an adventure by itself — winding hill roads, army checkposts, and views that keep getting better with every turn. But nothing prepares you for the first morning there.</p>
+      <p>I woke up before sunrise and stepped outside to find a white ocean of clouds below the cottage, with hilltops floating like islands. The whole valley was silent. No horns, no rush — just cold air and slowly changing light.</p>
+      <p>We walked to Konglak Para, the highest point, and had tea at a tiny shop run by a local family. Simple tea, but at 1,800 feet with that view, it tasted like a celebration.</p>
+      <p>Sajek reminded me that peace isn't a place you find — it's what happens when the noise finally stops. If you go, stay at least one night. The morning is the whole point.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section class="page" id="page-gallery">
+  <div class="section">
+    <h2 class="page-title">My <span class="grad">Gallery</span></h2>
+    <p class="page-sub">Moments from my journeys and life.</p>
+    <div class="g-grid">
+      <figure class="g-item">
+        <img src="/tanjidwebpic.jpg.jpg" alt="Tanjid with his motorcycle in a tree grove">
+        <figcaption>Me &amp; My Ride</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA8529.jpg" alt="Tanjid at Cox's Bazar Railway Station" loading="lazy">
+        <figcaption>Cox's Bazar Railway Station</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA8507.jpg" alt="Tanjid at Cox's Bazar Railway Station" loading="lazy">
+        <figcaption>Cox's Bazar Railway Station</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA5041.jpg" alt="Tanjid at Cox's Bazar Railway Station" loading="lazy">
+        <figcaption>Cox's Bazar Railway Station</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA4124.jpg" alt="Tanjid at Sylhet Tea Garden" loading="lazy">
+        <figcaption>Sylhet Tea Garden</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA0424.jpg" alt="Tanjid at Rubber Garden" loading="lazy">
+        <figcaption>Rubber Garden</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA4367.jpg" alt="Tanjid at Cox's Bazar" loading="lazy">
+        <figcaption>Cox's Bazar</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA9863.jpg" alt="Tanjid at Cox's Bazar" loading="lazy">
+        <figcaption>Cox's Bazar</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA2360.jpg" alt="Tanjid at Cox's Bazar Sea Beach" loading="lazy">
+        <figcaption>Cox's Bazar Sea Beach</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA5163.jpg" alt="Tanjid at Cox's Bazar Sea Beach" loading="lazy">
+        <figcaption>Cox's Bazar Sea Beach</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA2493.jpg" alt="Tanjid at Cox's Bazar Sea Beach" loading="lazy">
+        <figcaption>Cox's Bazar Sea Beach</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA7443.jpg" alt="Tanjid at Sitakunda, Chattogram" loading="lazy">
+        <figcaption>Sitakunda, Chattogram</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA9634.jpg" alt="Tanjid at Sitakunda, Chattogram" loading="lazy">
+        <figcaption>Sitakunda, Chattogram</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA1728.jpg" alt="Tanjid at Sitakunda, Chattogram" loading="lazy">
+        <figcaption>Sitakunda, Chattogram</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA4038.jpg" alt="Tanjid at Sitakunda, Chattogram" loading="lazy">
+        <figcaption>Sitakunda, Chattogram</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA6202.jpg" alt="Tanjid at Sitakunda, Chattogram" loading="lazy">
+        <figcaption>Sitakunda, Chattogram</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA8607.jpg" alt="Tanjid at Sitakunda, Chattogram" loading="lazy">
+        <figcaption>Sitakunda, Chattogram</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/IMG-20261110-WA0849.jpg" alt="Tanjid at Sitakunda, Chattogram" loading="lazy">
+        <figcaption>Sitakunda, Chattogram</figcaption>
+      </figure>
+    </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="page" id="page-contact">
+  <div class="section">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Let's <span class="grad">Connect</span></h2>
+        <p>Feel free to reach out. I'd love to hear from you!</p>
+        <div class="c-line">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M4 7 L12 13 L20 7" stroke="currentColor" stroke-width="1.8" fill="none"/></svg></span>
+          <span>tanjidofficial10@gmail.com</span>
+        </div>
+        <div class="c-line">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21 s-7 -5.3 -7 -11 a7 7 0 1 1 14 0 c0 5.7 -7 11 -7 11 Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.8" fill="currentColor"/></svg></span>
+          <span>Mymensingh, Bangladesh</span>
+        </div>
+        <div class="socials">
+          <a href="https://www.facebook.com/ubaidurrahmantanjid" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 9 h3 l-.5 3.5 H14 V22 h-3.8 v-9.5 H7.5 V9 h2.7 V6.8 C10.2 3.9 11.9 2 15.2 2 H17 v3.3 h-1.7 c-1 0 -1.3.4 -1.3 1.3 V9 Z"/></svg></a>
+          <a href="https://www.instagram.com/ubaidurrahmantanjid" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2 c3.2 0 3.6 0 4.9.1 3.3.1 4.7 1.6 4.8 4.8.1 1.3.1 1.6.1 4.9 s0 3.6 -.1 4.9 c-.1 3.2 -1.5 4.7 -4.8 4.8 -1.3.1 -1.6.1 -4.9.1 s-3.6 0 -4.9 -.1 c-3.3 -.1 -4.7 -1.6 -4.8 -4.8 -.1 -1.3 -.1 -1.6 -.1 -4.9 s0 -3.6 .1 -4.9 C2.4 3.9 3.8 2.4 7.1 2.3 8.4 2.2 8.8 2.2 12 2.2 Z M12 7 a5 5 0 1 0 0 10 5 5 0 0 0 0 -10 Z m0 8.2 a3.2 3.2 0 1 1 0 -6.4 3.2 3.2 0 0 1 0 6.4 Z m5.2 -9.6 a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0 -2.4 Z"/></svg></a>
+          <a href="https://github.com/ubaidurrahmantanjid" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2 a10 10 0 0 0 -3.2 19.5 c.5.1.7 -.2.7 -.5 v-1.7 c-2.8.6 -3.4 -1.2 -3.4 -1.2 -.5 -1.2 -1.1 -1.5 -1.1 -1.5 -.9 -.6.1 -.6.1 -.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9 .8.1 -1.1.4 -1.8.7 -2.2 -2.2 -.3 -4.6 -1.1 -4.6 -4.9 0 -1.1.4 -2 1 -2.7 -.1 -.2 -.4 -1.2.1 -2.7 0 0 .8 -.3 2.7 1 a9.4 9.4 0 0 1 5 0 c1.9 -1.3 2.7 -1 2.7 -1 .5 1.5.2 2.5.1 2.7.6.7 1 1.6 1 2.7 0 3.8 -2.4 4.6 -4.6 4.9.4.3.7.9.7 1.9 v2.8 c0 .3.2.6.7.5 A10 10 0 0 0 12 2 Z"/></svg></a>
+          <a href="https://www.linkedin.com/in/ubaidur-rahman-tanjid-4261673a4" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5 a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0 -5 Z M3 9 h4 v12 H3 Z M9 9 h3.8 v1.7 h.1 c.5 -1 1.8 -2 3.7 -2 4 0 4.7 2.6 4.7 6 V21 h-4 v-5.5 c0 -1.3 0 -3 -1.9 -3 s-2.2 1.4 -2.2 2.9 V21 H9 Z"/></svg></a>
+        </div>
+      </div>
+      <form class="cform" id="contactForm">
+        <input type="text" id="cfName" placeholder="Your Name" required>
+        <input type="email" id="cfEmail" placeholder="Your Email" required>
+        <textarea id="cfMsg" rows="5" placeholder="Your Message" required></textarea>
+        <button class="btn btn-primary" type="submit">Send Message <span aria-hidden="true">→</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  © 2026 <b>Ubaidur Rahman Tanjid</b> • Traveler • Developer • Dreamer • Made with 💙 in Bangladesh
+</footer>
+
+<!-- ============ EXPLORE MENU ============ -->
+<div class="explore-menu" id="exploreMenu" aria-hidden="true" role="dialog" aria-label="Explore menu">
+  <button class="em-close" id="exploreClose" aria-label="Close menu">✕</button>
+  <p class="em-title">Where to?</p>
+  <div class="em-list">
+    <button class="em-item" data-go="about">About</button>
+    <button class="em-item" data-go="projects">Projects</button>
+    <button class="em-item" data-go="blog">Blog</button>
+    <button class="em-item" data-go="gallery">Gallery</button>
+    <button class="em-item" data-go="contact">Contact</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var pages = ["home","about","projects","blog","gallery","contact"];
+  var nav = document.getElementById("mainNav");
+
+  function showPage(name, postId){
+    if(pages.indexOf(name) === -1) name = "home";
+    pages.forEach(function(p){
+      document.getElementById("page-" + p).classList.toggle("active", p === name);
+    });
+    document.querySelectorAll("[data-nav]").forEach(function(a){
+      if(a.closest("nav")) a.classList.toggle("active", a.getAttribute("data-nav") === name);
+    });
+    nav.classList.remove("open");
+    window.scrollTo({top:0, behavior:"instant" in window ? "instant" : "auto"});
+    if(name === "blog"){
+      var grid = document.getElementById("blogGrid");
+      var readers = document.querySelectorAll(".reader");
+      if(postId){
+        grid.style.display = "none";
+        readers.forEach(function(r){ r.hidden = r.id !== postId; });
+        document.querySelector(".page-sub").style.display = "none";
+      } else {
+        grid.style.display = "";
+        readers.forEach(function(r){ r.hidden = true; });
+        document.querySelector(".page-sub").style.display = "";
+      }
+    }
+    if(name === "about"){
+      document.querySelectorAll(".bar i").forEach(function(b){
+        b.style.width = "0";
+        setTimeout(function(){ b.style.width = b.getAttribute("data-w") + "%"; }, 80);
+      });
+    }
+  }
+
+  function route(){
+    var h = (location.hash || "#home").slice(1);
+    if(h.indexOf("post-") === 0){ showPage("blog", h); return; }
+    showPage(h, null);
+  }
+  window.addEventListener("hashchange", route);
+  route();
+
+  document.querySelectorAll("[data-back]").forEach(function(b){
+    b.addEventListener("click", function(){ location.hash = "#blog"; showPage("blog", null); });
+  });
+
+  var exploreMenu = document.getElementById("exploreMenu");
+  function openExplore(){ exploreMenu.classList.add("open"); exploreMenu.setAttribute("aria-hidden", "false"); }
+  function closeExplore(){ exploreMenu.classList.remove("open"); exploreMenu.setAttribute("aria-hidden", "true"); }
+  document.getElementById("exploreBtn").addEventListener("click", openExplore);
+  document.getElementById("exploreClose").addEventListener("click", closeExplore);
+  exploreMenu.addEventListener("click", function(e){ if(e.target === exploreMenu) closeExplore(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeExplore(); });
+  exploreMenu.querySelectorAll("[data-go]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var go = b.getAttribute("data-go");
+      closeExplore();
+      location.hash = "#" + go;
+      showPage(go, null);
+    });
+  });
+
+  document.getElementById("burgerBtn").addEventListener("click", function(){
+    nav.classList.toggle("open");
+  });
+
+  var themeBtn = document.getElementById("themeBtn");
+  function setTheme(light){
+    document.body.classList.toggle("light", light);
+    themeBtn.textContent = light ? "☀️" : "🌙";
+    try{ localStorage.setItem("tanjid-theme", light ? "light" : "dark"); }catch(e){}
+  }
+  var saved = "dark";
+  try{ saved = localStorage.getItem("tanjid-theme") || "dark"; }catch(e){}
+  setTheme(saved === "light");
+  themeBtn.addEventListener("click", function(){
+    setTheme(!document.body.classList.contains("light"));
+  });
+
+  document.getElementById("contactForm").addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var n = document.getElementById("cfName").value.trim();
+    var e = document.getElementById("cfEmail").value.trim();
+    var m = document.getElementById("cfMsg").value.trim();
+    var subject = encodeURIComponent("Message from your website — " + n);
+    var body = encodeURIComponent(m + "\n\n— " + n + " (" + e + ")");
+    location.href = "mailto:tanjidofficial10@gmail.com?subject=" + subject + "&body=" + body;
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var hero = document.querySelector(".page-home .hero");
+  if(!hero) return;
+  var layer = document.createElement("div");
+  layer.className = "fx-layer"; layer.setAttribute("aria-hidden","true");
+  var sun = document.createElement("div"); sun.className = "fx-sun";
+  sun.style.cssText = "right:6%;top:26%";
+  layer.appendChild(sun);
+  var stars = [[8,10],[16,22],[26,8],[38,16],[48,6],[57,20],[66,10],[74,24],[83,8],[90,18],[12,34],[95,32],[33,30],[61,32],[21,40],[70,38]];
+  stars.forEach(function(p,i){
+    var s = document.createElement("span"); s.className = "fx-star";
+    var sz = (i%3)+2;
+    s.style.cssText = "left:"+p[0]+"%;top:"+p[1]+"%;width:"+sz+"px;height:"+sz+"px;animation-delay:"+(i*0.35)+"s";
+    layer.appendChild(s);
+  });
+  [[15,320,80],[29,220,110],[8,180,95]].forEach(function(c){
+    var cl = document.createElement("div"); cl.className = "fx-cloud";
+    cl.style.cssText = "top:"+c[0]+"%;width:"+c[1]+"px;animation-duration:"+c[2]+"s";
+    layer.appendChild(cl);
+  });
+  var sh = document.createElement("div"); sh.className = "fx-shoot";
+  sh.style.cssText = "top:9%;right:6%";
+  layer.appendChild(sh);
+  hero.appendChild(layer);
+  var chip = document.createElement("div"); chip.className = "fx-chip";
+  chip.textContent = "PREVIEW — পছন্দ হলে বলুন, মূল ওয়েবসাইটে বসিয়ে দেব";
+  document.body.appendChild(chip);
+})();
+</script>
+</body>
+</html>
