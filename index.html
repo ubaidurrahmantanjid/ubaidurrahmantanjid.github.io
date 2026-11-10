@@ -270,6 +270,35 @@ footer b{color:var(--muted)}
   .section{padding:48px 0 64px}
 }
 </style>
+
+<style id="fx-home">
+/* ===== Home animations ===== */
+#page-home .hero-text>*{opacity:0; animation:fxUp 1s cubic-bezier(.16,.84,.3,1) forwards}
+#page-home .hero-text>*:nth-child(1){animation-delay:.15s}
+#page-home .hero-text>*:nth-child(2){animation-delay:.4s}
+#page-home .hero-text>*:nth-child(3){animation-delay:.65s}
+#page-home .hero-text>*:nth-child(4){animation-delay:.9s}
+#page-home .hero-text>*:nth-child(5){animation-delay:1.15s}
+@keyframes fxUp{from{opacity:0; transform:translateY(36px) scale(.985)} to{opacity:1; transform:translateY(0) scale(1)}}
+#page-home h1 .script{background:linear-gradient(110deg,#7cc0ff 15%,#ffffff 38%,#9fd0ff 52%,#2e7cf6 72%,#7cc0ff 90%); background-size:220% auto; -webkit-background-clip:text; background-clip:text; color:transparent; animation:fxShine 5s linear infinite}
+@keyframes fxShine{to{background-position:220% center}}
+.hero-bg svg>g circle{animation:fxTw 2.6s ease-in-out infinite alternate}
+.hero-bg svg>g circle:nth-child(2n){animation-delay:.7s; animation-duration:3.4s}
+.hero-bg svg>g circle:nth-child(3n){animation-delay:1.3s; animation-duration:2.1s}
+@keyframes fxTw{from{opacity:.15} to{opacity:1}}
+.fx-layer{position:absolute; inset:0; overflow:hidden; pointer-events:none}
+.fx-star{position:absolute; border-radius:50%; background:#eaf2ff; box-shadow:0 0 6px 1px rgba(190,220,255,.8); animation:fxTw 2.4s ease-in-out infinite alternate}
+.fx-cloud{position:absolute; height:40px; border-radius:50px; background:radial-gradient(ellipse at center, rgba(255,216,175,.42), rgba(255,216,175,0) 70%); filter:blur(7px); animation:fxDrift linear infinite}
+@keyframes fxDrift{from{transform:translateX(-35vw)} to{transform:translateX(118vw)}}
+.fx-sun{position:absolute; width:340px; height:340px; border-radius:50%; background:radial-gradient(circle, rgba(255,190,110,.5) 0%, rgba(255,160,80,.18) 45%, rgba(255,160,80,0) 70%); animation:fxPulse 5.5s ease-in-out infinite}
+@keyframes fxPulse{0%,100%{transform:scale(1); opacity:.75} 50%{transform:scale(1.13); opacity:1}}
+.fx-shoot{position:absolute; width:140px; height:2px; border-radius:2px; background:linear-gradient(90deg,#fff,rgba(255,255,255,0)); transform:rotate(-24deg); opacity:0; animation:fxShoot 9s ease-in infinite}
+@keyframes fxShoot{0%,70%{opacity:0; transform:translate(0,0) rotate(-24deg)} 74%{opacity:1} 86%,100%{opacity:0; transform:translate(-48vw,27vh) rotate(-24deg)}}
+#page-home .hero-btns .btn{position:relative; overflow:hidden}
+#page-home .hero-btns .btn::after{content:""; position:absolute; top:0; left:-80%; width:50%; height:100%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent); transform:skewX(-20deg); animation:fxBtn 3.6s ease-in-out infinite}
+@keyframes fxBtn{0%,55%{left:-80%} 85%,100%{left:130%}}
+@media (prefers-reduced-motion: reduce){#page-home .hero-text>*{animation:none; opacity:1} .fx-layer{display:none}}
+</style>
 </head>
 <body>
 
@@ -783,6 +812,34 @@ footer b{color:var(--muted)}
     var body = encodeURIComponent(m + "\n\n— " + n + " (" + e + ")");
     location.href = "mailto:tanjidofficial10@gmail.com?subject=" + subject + "&body=" + body;
   });
+})();
+</script>
+
+<script>
+(function(){
+  var hero = document.querySelector("#page-home .hero");
+  if(!hero) return;
+  var layer = document.createElement("div");
+  layer.className = "fx-layer"; layer.setAttribute("aria-hidden","true");
+  var sun = document.createElement("div"); sun.className = "fx-sun";
+  sun.style.cssText = "right:6%;top:26%";
+  layer.appendChild(sun);
+  var stars = [[8,10],[16,22],[26,8],[38,16],[48,6],[57,20],[66,10],[74,24],[83,8],[90,18],[12,34],[95,32],[33,30],[61,32],[21,40],[70,38]];
+  stars.forEach(function(p,i){
+    var s = document.createElement("span"); s.className = "fx-star";
+    var sz = (i%3)+2;
+    s.style.cssText = "left:"+p[0]+"%;top:"+p[1]+"%;width:"+sz+"px;height:"+sz+"px;animation-delay:"+(i*0.35)+"s";
+    layer.appendChild(s);
+  });
+  [[15,320,80],[29,220,110],[8,180,95]].forEach(function(c){
+    var cl = document.createElement("div"); cl.className = "fx-cloud";
+    cl.style.cssText = "top:"+c[0]+"%;width:"+c[1]+"px;animation-duration:"+c[2]+"s";
+    layer.appendChild(cl);
+  });
+  var sh = document.createElement("div"); sh.className = "fx-shoot";
+  sh.style.cssText = "top:9%;right:6%";
+  layer.appendChild(sh);
+  hero.appendChild(layer);
 })();
 </script>
 </body>
