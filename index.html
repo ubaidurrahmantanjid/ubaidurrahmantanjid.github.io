@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ubaidur Rahman Tanjid — Traveler • Developer • Dreamer</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a1128'/%3E%3Cpath d='M9 13h21v7h-7v31h-7V20H9z' fill='%234db2ff'/%3E%3Cpath d='M23 51 37 23l13 28z' fill='%232e7cf6'/%3E%3Cpath d='M38 51 48 31l9 20z' fill='%2356a8ff'/%3E%3C/svg%3E">
 <meta name="description" content="Personal website of Ubaidur Rahman Tanjid — science student from Mymensingh, Bangladesh. Traveler, developer, dreamer.">
 <style>
 :root{
@@ -41,7 +42,7 @@ header{
 }
 .nav-wrap{width:min(1200px,92%); margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:16px}
 .logo{display:flex; align-items:center; gap:10px; font-size:1.3rem; font-weight:800; letter-spacing:.3px}
-.logo svg{width:30px;height:30px;flex:none}
+.logo svg{height:30px;width:auto;flex:none}
 nav.main{display:flex; gap:6px; align-items:center}
 nav.main a{
   padding:9px 15px; border-radius:10px; font-size:.98rem; font-weight:600; color:var(--muted);
@@ -275,10 +276,15 @@ footer b{color:var(--muted)}
 <header>
   <div class="nav-wrap">
     <a class="logo" href="#home" data-nav="home" aria-label="Tanjid — Home">
-      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <path d="M4 38 L18 14 L26 27 L31 19 L44 38 Z" fill="#2e7cf6"/>
-        <path d="M14 38 L24 22 L33 38 Z" fill="#56a8ff" opacity=".75"/>
-        <path d="M18 14 L21.5 19.5 L14.5 19.5 Z" fill="#eaf4ff"/>
+      <svg viewBox="0 0 76 44" fill="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="logoGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#4db2ff"/><stop offset="1" stop-color="#1f66dd"/>
+          </linearGradient>
+        </defs>
+        <path d="M44 40 L56 20 L70 40 Z" fill="#56a8ff" opacity=".85"/>
+        <path d="M20 40 L38 8 L58 40 Z" fill="url(#logoGrad)"/>
+        <path d="M2 4 H32 V12 H21 V40 H13 V12 H2 Z" fill="url(#logoGrad)"/>
       </svg>
       Tanjid
     </a>
