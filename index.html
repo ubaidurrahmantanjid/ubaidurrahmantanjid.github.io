@@ -176,10 +176,9 @@ main{padding-top:68px}
 .stat span{color:var(--muted); font-size:.9rem}
 
 /* ---------- Gallery ---------- */
-.g-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:44px}
-.g-item{border-radius:var(--radius); overflow:hidden; position:relative; border:1px solid var(--line); box-shadow:var(--shadow)}
-.g-item svg, .g-item img{width:100%; height:230px; object-fit:cover; display:block; transition:transform .4s}
-.g-item:hover svg, .g-item:hover img{transform:scale(1.06)}
+.g-grid{columns:3; column-gap:22px; margin-top:44px}
+.g-item{border-radius:var(--radius); overflow:hidden; position:relative; border:1px solid var(--line); box-shadow:var(--shadow); margin:0 0 22px; break-inside:avoid}
+.g-item img{width:100%; height:auto; display:block}
 .g-item figcaption{
   position:absolute; inset:auto 0 0 0; padding:30px 16px 13px; color:#fff; font-weight:700; font-size:.98rem;
   background:linear-gradient(0deg, rgba(3,8,20,.78), transparent);
@@ -229,7 +228,7 @@ footer b{color:var(--muted)}
 /* ---------- Responsive ---------- */
 @media (max-width: 980px){
   .grid-3{grid-template-columns:repeat(2,1fr)}
-  .g-grid{grid-template-columns:repeat(2,1fr)}
+  .g-grid{columns:2}
   .about-grid{grid-template-columns:1fr; gap:40px}
   .portrait-wrap{margin:0 auto}
   .contact-grid{grid-template-columns:1fr; gap:36px}
@@ -246,7 +245,8 @@ footer b{color:var(--muted)}
   nav.main a.active::after{display:none}
   nav.main a.active{background:var(--accent-soft)}
   .burger{display:grid; place-items:center}
-  .grid-3, .g-grid{grid-template-columns:1fr}
+  .grid-3{grid-template-columns:1fr}
+  .g-grid{columns:1}
   .hero-inner{padding:44px 0 84px}
   .section{padding:48px 0 64px}
 }
@@ -549,64 +549,74 @@ footer b{color:var(--muted)}
         <figcaption>Me &amp; My Ride</figcaption>
       </figure>
       <figure class="g-item">
-        <svg viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sajek Valley clouds">
-          <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7b267"/><stop offset=".55" stop-color="#c97a9b"/><stop offset="1" stop-color="#5b4a8a"/></linearGradient></defs>
-          <rect width="400" height="230" fill="url(#g1)"/>
-          <circle cx="310" cy="70" r="24" fill="#ffe3ae"/>
-          <path d="M0 150 L90 105 L170 135 L260 100 L400 140 L400 230 L0 230 Z" fill="#3c3464"/>
-          <ellipse cx="90" cy="185" rx="150" ry="26" fill="#e8ecf7" opacity=".85"/>
-          <ellipse cx="300" cy="205" rx="170" ry="28" fill="#dfe6f5" opacity=".9"/>
-        </svg>
-        <figcaption>Sajek Valley — Sea of Clouds</figcaption>
+        <img src="IMG-20261110-WA8529.jpg" alt="Tanjid at Cox's Bazar Railway Station" loading="lazy">
+        <figcaption>Cox's Bazar Railway Station</figcaption>
       </figure>
       <figure class="g-item">
-        <svg viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Cox's Bazar beach">
-          <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98e"/><stop offset=".5" stop-color="#ff9e64"/><stop offset=".51" stop-color="#2e7ca6"/><stop offset="1" stop-color="#175d84"/></linearGradient></defs>
-          <rect width="400" height="230" fill="url(#g2)"/>
-          <circle cx="200" cy="105" r="26" fill="#fff3cf"/>
-          <path d="M0 150 Q60 142 120 150 T240 150 T400 148 V158 Q340 166 280 158 T160 158 T0 160 Z" fill="#eaf6ff" opacity=".8"/>
-          <path d="M0 205 L400 190 L400 230 L0 230 Z" fill="#e8c98f"/>
-        </svg>
-        <figcaption>Cox's Bazar — Golden Hour</figcaption>
+        <img src="IMG-20261110-WA8507.jpg" alt="Tanjid at Cox's Bazar Railway Station" loading="lazy">
+        <figcaption>Cox's Bazar Railway Station</figcaption>
       </figure>
       <figure class="g-item">
-        <svg viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sylhet tea garden">
-          <defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cdeeb0"/><stop offset="1" stop-color="#4c9a52"/></linearGradient></defs>
-          <rect width="400" height="230" fill="url(#g3)"/>
-          <circle cx="70" cy="42" r="20" fill="#fff8d6"/>
-          <g stroke="#2e7d3a" stroke-width="7" fill="none" opacity=".8">
-            <path d="M-10 130 Q200 100 410 128"/><path d="M-10 165 Q200 132 410 162"/><path d="M-10 202 Q200 168 410 198"/>
-          </g>
-          <path d="M0 230 L400 230 L400 214 Q200 196 0 216 Z" fill="#256b31"/>
-        </svg>
-        <figcaption>Sylhet — Tea Gardens</figcaption>
+        <img src="IMG-20261110-WA5041.jpg" alt="Tanjid at Cox's Bazar Railway Station" loading="lazy">
+        <figcaption>Cox's Bazar Railway Station</figcaption>
       </figure>
       <figure class="g-item">
-        <svg viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Bandarban hills">
-          <defs><linearGradient id="g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fc7ee"/><stop offset="1" stop-color="#3d6ea5"/></linearGradient></defs>
-          <rect width="400" height="230" fill="url(#g4)"/>
-          <path d="M0 130 L110 60 L200 115 L290 50 L400 120 L400 230 L0 230 Z" fill="#2c537e"/>
-          <path d="M290 50 L308 66 L272 66 Z" fill="#fff"/>
-          <path d="M0 175 L140 120 L270 160 L400 128 L400 230 L0 230 Z" fill="#1b3a5c"/>
-          <ellipse cx="120" cy="200" rx="170" ry="20" fill="#eef4fb" opacity=".55"/>
-          <ellipse cx="320" cy="216" rx="150" ry="18" fill="#eef4fb" opacity=".5"/>
-        </svg>
-        <figcaption>Bandarban — Misty Hills</figcaption>
+        <img src="IMG-20261110-WA4124.jpg" alt="Tanjid at Sylhet Tea Garden" loading="lazy">
+        <figcaption>Sylhet Tea Garden</figcaption>
       </figure>
       <figure class="g-item">
-        <svg viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Railway through green hills">
-          <defs><linearGradient id="g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe0ff"/><stop offset="1" stop-color="#578f5f"/></linearGradient></defs>
-          <rect width="400" height="230" fill="url(#g5)"/>
-          <path d="M0 90 Q120 55 400 80 L400 230 L0 230 Z" fill="#3c7a44"/>
-          <path d="M0 230 L165 128 L205 128 L260 230 Z" fill="#5b4632"/>
-          <path d="M172 230 L192 132 M236 230 L210 132" stroke="#cfd6dd" stroke-width="5"/>
-          <g stroke="#3a2c1c" stroke-width="4"><path d="M168 205 H244"/><path d="M178 178 H232"/><path d="M186 155 H222"/></g>
-          <g fill="#2c5e33"><circle cx="52" cy="105" r="30"/><circle cx="345" cy="98" r="34"/><circle cx="382" cy="128" r="24"/></g>
-        </svg>
-        <figcaption>On the Way — Hill Railway</figcaption>
+        <img src="IMG-20261110-WA0424.jpg" alt="Tanjid at Rubber Garden" loading="lazy">
+        <figcaption>Rubber Garden</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="IMG-20261110-WA4367.jpg" alt="Tanjid at Cox's Bazar" loading="lazy">
+        <figcaption>Cox's Bazar</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="IMG-20261110-WA9863.jpg" alt="Tanjid at Cox's Bazar" loading="lazy">
+        <figcaption>Cox's Bazar</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="IMG-20261110-WA2360.jpg" alt="Tanjid at Cox's Bazar Sea Beach" loading="lazy">
+        <figcaption>Cox's Bazar Sea Beach</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="IMG-20261110-WA5163.jpg" alt="Tanjid at Cox's Bazar Sea Beach" loading="lazy">
+        <figcaption>Cox's Bazar Sea Beach</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="IMG-20261110-WA2493.jpg" alt="Tanjid at Cox's Bazar Sea Beach" loading="lazy">
+        <figcaption>Cox's Bazar Sea Beach</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="IMG-20261110-WA7443.jpg" alt="Tanjid at Sitakunda, Chattogram" loading="lazy">
+        <figcaption>Sitakunda, Chattogram</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="IMG-20261110-WA9634.jpg" alt="Tanjid at Sitakunda, Chattogram" loading="lazy">
+        <figcaption>Sitakunda, Chattogram</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="IMG-20261110-WA1728.jpg" alt="Tanjid at Sitakunda, Chattogram" loading="lazy">
+        <figcaption>Sitakunda, Chattogram</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="IMG-20261110-WA4038.jpg" alt="Tanjid at Sitakunda, Chattogram" loading="lazy">
+        <figcaption>Sitakunda, Chattogram</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="IMG-20261110-WA6202.jpg" alt="Tanjid at Sitakunda, Chattogram" loading="lazy">
+        <figcaption>Sitakunda, Chattogram</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="IMG-20261110-WA8607.jpg" alt="Tanjid at Sitakunda, Chattogram" loading="lazy">
+        <figcaption>Sitakunda, Chattogram</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="IMG-20261110-WA0849.jpg" alt="Tanjid at Sitakunda, Chattogram" loading="lazy">
+        <figcaption>Sitakunda, Chattogram</figcaption>
       </figure>
     </div>
-  </div>
 </section>
 
 <!-- ================= CONTACT ================= -->
