@@ -300,23 +300,26 @@ footer b{color:var(--muted)}
 @media (prefers-reduced-motion: reduce){#page-home .hero-text>*{animation:none; opacity:1} .fx-layer{display:none}}
 </style>
 
-<style id="fx-cord">
-/* ===== PREVIEW v2: beaded-chain pull toggle hanging from the sun/moon button ===== */
-.pull-cord{position:fixed; z-index:350; width:36px; margin-left:-18px; display:flex; flex-direction:column; align-items:center; touch-action:none; cursor:grab; user-select:none; -webkit-user-select:none; transform-origin:top center; animation:cordSway 6s ease-in-out infinite}
-.pull-cord:active{cursor:grabbing}
-@keyframes cordSway{0%,100%{transform:rotate(1.6deg)} 50%{transform:rotate(-1.6deg)}}
-.cord-chain{width:12px; height:104px; background-image:radial-gradient(circle at 50% 50%, #ffedb5 0 1.8px, #d9b45c 3px, #8a6a20 4.1px, rgba(0,0,0,0) 4.8px); background-size:12px 10.5px; background-repeat:repeat-y; background-position:top center; filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
-.cord-handle{margin-top:1px; width:17px; height:24px; border-radius:9px 9px 11px 11px; background:linear-gradient(180deg,#ffe9a8,#c9a13f 55%,#8a6a20); border:1px solid #6e5518; box-shadow:0 4px 9px rgba(0,0,0,.35), inset 0 1px 2px rgba(255,255,255,.7)}
-.theme-btn.flip{animation:btnFlip .62s ease}
-@keyframes btnFlip{0%{transform:rotateY(0) scale(1)} 50%{transform:rotateY(180deg) scale(1.18)} 100%{transform:rotateY(360deg) scale(1)}}
+
+<style id="fx-trans">
+/* ===== PREVIEW: page transition styles (switchable) ===== */
+@keyframes tFade{from{opacity:0} to{opacity:1}}
+@keyframes tRise{from{opacity:0; transform:translateY(26px)} to{opacity:1; transform:translateY(0)}}
+@keyframes tSlide{from{opacity:.35; transform:translateX(58px)} to{opacity:1; transform:translateX(0)}}
+@keyframes tZoom{from{opacity:0; transform:scale(.96)} to{opacity:1; transform:scale(1)}}
+body[data-trans="fade"] .page.active{animation:tFade .45s ease both}
+body[data-trans="rise"] .page.active{animation:tRise .5s cubic-bezier(.2,.8,.3,1) both}
+body[data-trans="slide"] .page.active{animation:tSlide .48s cubic-bezier(.2,.8,.3,1) both}
+body[data-trans="zoom"] .page.active{animation:tZoom .45s cubic-bezier(.2,.8,.3,1) both}
+.trans-bar{position:fixed; left:50%; transform:translateX(-50%); bottom:52px; z-index:998; display:flex; gap:6px; align-items:center; background:rgba(6,14,30,.9); border:1px solid rgba(140,180,255,.45); padding:7px 9px; border-radius:999px; backdrop-filter:blur(6px)}
+.trans-bar span{color:#9db9e8; font-size:.75rem; padding:0 4px; white-space:nowrap}
+.trans-bar button{border:1px solid rgba(140,180,255,.35); background:rgba(46,124,246,.12); color:#dbe9ff; font-family:inherit; font-size:.8rem; font-weight:700; padding:7px 11px; border-radius:999px; cursor:pointer; white-space:nowrap}
+.trans-bar button.on{background:#2e7cf6; color:#fff; border-color:#2e7cf6}
 .fx-chip{position:fixed; left:14px; bottom:14px; z-index:999; background:rgba(6,14,30,.88); color:#cfe2ff; border:1px solid rgba(140,180,255,.45); padding:8px 14px; border-radius:999px; font-size:.82rem}
+@media (max-width:560px){.trans-bar{bottom:56px; max-width:94vw; overflow-x:auto}}
 </style>
 </head>
 <body>
-<div class="pull-cord" id="pullCord" role="button" aria-label="Pull the chain to switch dark or light mode" title="চেইনটা টান দিলে সূর্য ঘুরে চাঁদ আসবে">
-  <div class="cord-chain" id="cordChain"></div>
-  <div class="cord-handle" id="cordHandle"></div>
-</div>
 
 
 <header>
@@ -860,65 +863,25 @@ footer b{color:var(--muted)}
 })();
 </script>
 
+
 <script>
 (function(){
-  var cord = document.getElementById("pullCord");
-  var chain = document.getElementById("cordChain");
-  var themeBtn = document.getElementById("themeBtn");
-  var BASE = 104, MAX = 74, THRESH = 32;
-  function place(){
-    if(!themeBtn) return;
-    var r = themeBtn.getBoundingClientRect();
-    cord.style.left = (r.left + r.width/2) + "px";
-    cord.style.top = (r.bottom - 6) + "px";
-  }
-  function toggleTheme(){
-    themeBtn.classList.remove("flip"); void themeBtn.offsetWidth; themeBtn.classList.add("flip");
-    setTimeout(function(){
-      var light = !document.body.classList.contains("light");
-      document.body.classList.toggle("light", light);
-      themeBtn.textContent = light ? "☀️" : "🌙";
-      try{ localStorage.setItem("tanjid-theme", light ? "light" : "dark"); }catch(e){}
-    }, 290);
-  }
-  place();
-  window.addEventListener("resize", place);
-  window.addEventListener("load", place);
-  window.addEventListener("scroll", place, {passive:true});
-
-  var startY = null, extra = 0, moved = false;
-  function down(e){
-    startY = (e.touches ? e.touches[0].clientY : e.clientY);
-    extra = 0; moved = false;
-    cord.style.animationPlayState = "paused";
-    chain.style.transition = "none";
-    e.preventDefault();
-  }
-  function move(e){
-    if(startY === null) return;
-    var y = (e.touches ? e.touches[0].clientY : e.clientY);
-    extra = Math.max(0, Math.min(MAX, y - startY));
-    if(extra > 6) moved = true;
-    chain.style.height = (BASE + extra) + "px";
-  }
-  function up(){
-    if(startY === null) return;
-    var shouldToggle = extra >= THRESH || !moved;
-    chain.style.transition = "height .5s cubic-bezier(.2,2.2,.4,1)";
-    chain.style.height = BASE + "px";
-    cord.style.animationPlayState = "running";
-    startY = null;
-    if(shouldToggle) setTimeout(toggleTheme, 90);
-  }
-  cord.addEventListener("pointerdown", down);
-  window.addEventListener("pointermove", move);
-  window.addEventListener("pointerup", up);
-  cord.addEventListener("touchstart", down, {passive:false});
-  window.addEventListener("touchmove", move, {passive:true});
-  window.addEventListener("touchend", up);
-
+  document.body.setAttribute("data-trans", "rise");
+  var bar = document.createElement("div"); bar.className = "trans-bar";
+  bar.innerHTML = "<span>স্টাইল:</span>" +
+    '<button data-t="fade">১ · ফেড</button>' +
+    '<button data-t="rise" class="on">২ · ভেসে ওঠা</button>' +
+    '<button data-t="slide">৩ · স্লাইড</button>' +
+    '<button data-t="zoom">৪ · জুম</button>';
+  document.body.appendChild(bar);
+  bar.querySelectorAll("button").forEach(function(b){
+    b.addEventListener("click", function(){
+      document.body.setAttribute("data-trans", b.getAttribute("data-t"));
+      bar.querySelectorAll("button").forEach(function(x){ x.classList.toggle("on", x === b); });
+    });
+  });
   var chip = document.createElement("div"); chip.className = "fx-chip";
-  chip.textContent = "PREVIEW — চেইনটা টান দিয়ে দেখুন, পছন্দ হলে মূল সাইটে বসাব";
+  chip.textContent = "PREVIEW — স্টাইল বেছে মেনু থেকে পেজ বদলে দেখুন";
   document.body.appendChild(chip);
 })();
 </script>
