@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ubaidurrahmantanjid.bro.bd/sitemap.xml
